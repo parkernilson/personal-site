@@ -4,6 +4,7 @@
   "devDependencies": {
     "@tsconfig/svelte": "^1.0.10",
     "@types/animejs": "^3.1.2",
+    "@types/bezier-easing": "^2.1.2",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "mini-css-extract-plugin": "^0.6.0",
@@ -24,6 +25,7 @@
     "dev": "docker-compose -f docker-compose.dev.yml up --build"
   },
   "dependencies": {
-    "animejs": "^3.2.1"
+    "animejs": "^3.2.1",
+    "bezier-easing": "^2.1.0"
   }
 }

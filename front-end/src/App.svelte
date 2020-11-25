@@ -19,11 +19,12 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		position: relative;
 
 		margin: 0;
 		height: 100vh;
 		box-sizing: border-box;
-		background: linear-gradient(160deg, #7CC2FF 0%, #2C8DE3 100%);
+		/* background: linear-gradient(160deg, #7CC2FF 0%, #2C8DE3 100%); */
 	}
 
 	:root {
@@ -97,6 +98,7 @@
 </svelte:head>
 
 <div class="app-container">
+	<WavyBackground />
 	<div class="upper-content">
 		<div class="circle" />
 		<p class="tagline">simple, concise, productive,</p>
@@ -109,4 +111,3 @@
 		{/if}
 	</div>
 </div>
-<WavyBackground />

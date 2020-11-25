@@ -1,32 +1,57 @@
 <script lang="typescript">
     import { animateCallback } from './methods/animateCallback';
+    import BezierEasing from 'bezier-easing';
+
+    let container: HTMLElement;
 
     const root = document.documentElement;
-    const range = 150;
-    let v = -range;
-    let w = 0; 
+    const range = 200;
+    const easing = BezierEasing(0.40, 0.10, 0.58, 0.81);
 
-    animateCallback(t => {
-        root.style.setProperty("--v", `${t*range*2 + v}%`);
-        root.style.setProperty("--w", `${t*range*2 + w}%`);
-    }, 1000);
+    const cycle = () => {
+        let v = -range;
+        let w = 0; 
+        const duration = 6000;
+        const vColor = "#428af5";
+        const wColor = "blue";
+        root.style.setProperty("--v-color", vColor);
+        root.style.setProperty("--w-color", wColor);
+
+        return animateCallback(t => {
+            root.style.setProperty("--v", `${t*range*2 + v}%`);
+            root.style.setProperty("--w", `${t*range*2 + w}%`);
+        }, { duration, easing }).then(() => {
+            root.style.setProperty("--v-color", wColor);
+            root.style.setProperty("--w-color", vColor);
+            v = -range;
+            w = 0;
+            return animateCallback(t => {
+                root.style.setProperty("--v", `${t*range*2 + v}%`);
+                root.style.setProperty("--w", `${t*range*2 + w}%`);
+            }, { duration: duration/2, easing })
+        })
+    }
+
+    async function run() {
+        while (true) {
+            await cycle();
+        }
+    }
+
+    run()
 
 </script>
 
 <style>
-    :root {
-        --p: 0%;
-    }
-    .target {
-        background-image: linear-gradient(160deg, #428af5 var(--v), blue var(--w));
+    .container {
+        background-image: linear-gradient(160deg, var(--v-color) var(--v), var(--w-color) var(--w));
         position: absolute;
-        width: 400px;
-        height: 400px;
+        z-index: -100;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 </style>
 
-<div class="container">
-    <div class="target">
-
-    </div>
-</div>
+<div bind:this={container} class="container"></div>
