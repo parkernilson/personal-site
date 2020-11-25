@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+    front-end:
+        ports:
+            - 5001:8080
+        build: front-end
+        volumes:
+            - ./front-end/src/:/code/src # connect the source code to the container for live-reloads during development
+        entrypoint: [ "npm", "run", "dev-server" ]
+    # strapi:
+    #     image: strapi/strapi
+    #     volumes: 
+    #         - ./strapi/app/:/srv/app
+    #     ports:
+    #         - 1337:1337
