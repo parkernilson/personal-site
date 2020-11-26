@@ -41,8 +41,9 @@
 	.lower-content {
 		height: 64px;
 		display: flex;
-		flex-direction: column-reverse;
+		flex-direction: column;
 		align-items: center;
+		justify-content: space-around;
 	}
 	
 	.circle {
@@ -51,7 +52,8 @@
 		border-radius: 100px;
 		background: linear-gradient(130deg, white 0%, #FFCB3C 60%);
 		margin: 0;
-		margin-bottom: var(--branding-spacing);
+		margin-bottom: calc(var(--branding-spacing) * 3);
+		box-shadow: 0px 3px 50px rgba(255, 192, 203, 0.5);
 	}
 	.tagline {
 		font-family: Consolas, monospace;
@@ -74,6 +76,10 @@
 		font-weight: 400;
 	}
 
+	.scroll-down {
+		color: white;
+		margin: 0;
+	}
 	@keyframes bobble {
 		from {
 			margin-bottom: 0px;
@@ -107,6 +113,7 @@
 	</div>
 	<div class="lower-content">
 		{#if downArrowVisible}
+			<div transition:fade class="scroll-down">Scroll down</div>
 			<img transition:fade class="down-arrow" src="down-arrow.svg" alt="down arrow" />
 		{/if}
 	</div>
