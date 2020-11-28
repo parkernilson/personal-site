@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "projects",
   "info": {
-    "name": "Project"
+    "name": "Projects",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -15,6 +16,23 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "shortDescription": {
+      "type": "text"
+    },
+    "imageGallery": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "categories": {
+      "type": "text"
     }
   }
 }

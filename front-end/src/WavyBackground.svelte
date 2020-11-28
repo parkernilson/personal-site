@@ -2,6 +2,8 @@
     import { animateCallback } from './methods/animateCallback';
     import BezierEasing from 'bezier-easing';
 
+    export let animating: boolean = true;
+
     let container: HTMLElement;
 
     const root = document.documentElement;
@@ -17,28 +19,32 @@
         root.style.setProperty("--v-color", vColor);
         root.style.setProperty("--w-color", wColor);
 
-        return animateCallback(t => {
-            root.style.setProperty("--v", `${t*range*2 + v}%`);
-            root.style.setProperty("--w", `${t*range*2 + w}%`);
+        return animateCallback((t, x) => {
+            root.style.setProperty("--v", `${x*range*2 + v}%`);
+            root.style.setProperty("--w", `${x*range*2 + w}%`);
         }, { duration, easing }).then(() => {
             root.style.setProperty("--v-color", wColor);
             root.style.setProperty("--w-color", vColor);
             v = -range;
             w = 0;
-            return animateCallback(t => {
-                root.style.setProperty("--v", `${t*range*2 + v}%`);
-                root.style.setProperty("--w", `${t*range*2 + w}%`);
+            return animateCallback((t, x) => {
+                root.style.setProperty("--v", `${x*range*2 + v}%`);
+                root.style.setProperty("--w", `${x*range*2 + w}%`);
             }, { duration: duration/2, easing })
         })
     }
 
     async function run() {
-        while (true) {
+        while (animating) {
             await cycle();
         }
     }
 
-    run()
+    $: {
+        if (animating) {
+            run()
+        }
+    }
 
 </script>
 

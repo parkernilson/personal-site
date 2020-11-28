@@ -1,12 +1,12 @@
 <script lang="typescript">
-	import MePicture from './MePicture.svelte';
 	import { fade } from 'svelte/transition';
 	import WavyBackground from './WavyBackground.svelte';
+	import ProjectsList from './projects/ProjectsList.svelte';
 
-	let downArrowVisible = true;
 	let scrollY: number;
+	let atTop: boolean;
 
-	$: downArrowVisible = scrollY > 0 ? false : true;
+	$: atTop = scrollY > 0 ? false : true;
 </script>
 
 <svelte:window bind:scrollY={scrollY} />
@@ -15,7 +15,7 @@
 	:global(body) {
 		padding: 0;
 	}
-	.app-container {
+	.landing-area {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -53,7 +53,7 @@
 		background: linear-gradient(130deg, white 0%, #FFCB3C 60%);
 		margin: 0;
 		margin-bottom: calc(var(--branding-spacing) * 3);
-		box-shadow: 0px 3px 50px rgba(255, 192, 203, 0.5);
+		/* box-shadow: 0px 3px 50px rgba(255, 192, 203, 0.5); */
 	}
 	.tagline {
 		font-family: Consolas, monospace;
@@ -103,8 +103,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
 </svelte:head>
 
-<div class="app-container">
-	<WavyBackground />
+<div class="landing-area">
+	<WavyBackground animating={atTop} />
 	<div class="upper-content">
 		<div class="circle" />
 		<p class="tagline">simple, concise, productive,</p>
@@ -112,9 +112,11 @@
 		<h2 class="occupation">Web Developer</h2>
 	</div>
 	<div class="lower-content">
-		{#if downArrowVisible}
+		{#if atTop}
 			<div transition:fade class="scroll-down">Scroll down</div>
 			<img transition:fade class="down-arrow" src="down-arrow.svg" alt="down arrow" />
 		{/if}
 	</div>
 </div>
+
+<ProjectsList />

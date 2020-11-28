@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "animejs": "^3.2.1",
-    "bezier-easing": "^2.1.0"
+    "bezier-easing": "^2.1.0",
+    "marked": "^1.2.5"
   }
 }

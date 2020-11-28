@@ -58,15 +58,16 @@ module.exports = {
 		})
 	],
 	devtool: prod ? false : 'source-map',
-	// add a proxy/rewrite rule for /api requests
 	devServer: {
 		host: '0.0.0.0', 
-		// proxy: {
-		// 	'/api': {
-		// 		// TODO: add the api target here
-		// 		target: '',
-		// 		pathRewrite: {'^/api': ''}
-		// 	}
-		// }
+		proxy: {
+			'/content': {
+				target: 'http://strapi:1337/',
+				pathRewrite: {'^/content': ''}
+			},
+			'/uploads': {
+				target: 'http://strapi:1337/'
+			}
+		}
 	}
 };
