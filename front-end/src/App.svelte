@@ -1,11 +1,9 @@
 <script lang="typescript">
 	import { fade } from 'svelte/transition';
-	import WavyBackground from './WavyBackground.svelte';
 	import ProjectsList from './projects/ProjectsList.svelte';
 
 	let scrollY: number;
 	let atTop: boolean;
-
 	$: atTop = scrollY > 0 ? false : true;
 </script>
 
@@ -16,22 +14,22 @@
 		padding: 0;
 		font-family: Montserrat, sans-serif;
 	}
+	:root {
+		--branding-spacing: 24px;
+		--card-border-radius: 42px;
+		--master-side-margins: 32px;
+	}
 	.landing-area {
 		display: flex;
+		box-sizing: border-box;
 		flex-direction: column;
 		justify-content: space-between;
 		position: relative;
 
 		margin: 0;
 		height: 100vh;
-		box-sizing: border-box;
-		/* background: linear-gradient(160deg, #7CC2FF 0%, #2C8DE3 100%); */
+		background: linear-gradient(160deg, #7CC2FF 0%, #2C8DE3 100%);
 	}
-
-	:root {
-		--branding-spacing: 24px;
-	}
-
 	.upper-content {
 		flex: 1;
 		display: flex;
@@ -40,13 +38,13 @@
 		justify-content: center;
 	}
 	.lower-content {
-		height: 64px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-around;
+
+		height: 64px;
 	}
-	
 	.circle {
 		width: 200px;
 		height: 200px;
@@ -54,7 +52,6 @@
 		background: linear-gradient(130deg, white 0%, #FFCB3C 60%);
 		margin: 0;
 		margin-bottom: calc(var(--branding-spacing) * 3);
-		/* box-shadow: 0px 3px 50px rgba(255, 192, 203, 0.5); */
 	}
 	.tagline {
 		font-family: Consolas, monospace;
@@ -76,7 +73,6 @@
 		color: #FFCB3C;
 		font-weight: 400;
 	}
-
 	.scroll-down {
 		color: white;
 		margin: 0;
@@ -105,7 +101,6 @@
 </svelte:head>
 
 <div class="landing-area">
-	<WavyBackground animating={atTop} />
 	<div class="upper-content">
 		<div class="circle" />
 		<p class="tagline">simple, concise, productive,</p>
