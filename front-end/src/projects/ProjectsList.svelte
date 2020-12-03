@@ -18,7 +18,7 @@
         margin-top: 64px;
         margin-bottom: 64px;
         font-weight: 400;
-        color: #707070;
+        color: #202020;
     }
 </style>
 

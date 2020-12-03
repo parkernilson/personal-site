@@ -15,7 +15,7 @@
         let w = 0; 
         const duration = 6000;
         const vColor = "#428af5";
-        const wColor = "blue";
+        const wColor = "#0066ff";
         root.style.setProperty("--v-color", vColor);
         root.style.setProperty("--w-color", wColor);
 
@@ -41,8 +41,12 @@
     }
 
     $: {
+        /*
+            BUG: There is a bug when the user scrolls down, then up before the animation is over.
+            Overlapping animations are caused. The cycle should be cancelled if it is restarted again.
+        */
         if (animating) {
-            run()
+            // run()
         }
     }
 
@@ -50,7 +54,8 @@
 
 <style>
     .container {
-        background-image: linear-gradient(160deg, var(--v-color) var(--v), var(--w-color) var(--w));
+        /* background-image: linear-gradient(160deg, var(--v-color) var(--v), var(--w-color) var(--w)); */
+        background-color: #428af5;
         position: absolute;
         z-index: -100;
         top: 0;

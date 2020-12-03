@@ -37,6 +37,9 @@ export interface Project {
     title: string;
     shortDescription: string;
     imageGallery: StrapiImage[];
+    coverImage: StrapiImage;
+    projectLogo: StrapiImage;
+    projectLogoBackgroundColor: string;
     categories: string;
     /** Markdown description for project */
     description: string;
