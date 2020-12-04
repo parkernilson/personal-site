@@ -1,6 +1,5 @@
 <script lang="typescript">
     import type { Project } from "./Project";
-    import Card from '../ui/Card.svelte';
 
     export let project: Project;
 
@@ -8,8 +7,6 @@
 
 <style>
     .container {
-        max-width: 350px;
-        margin-right: 16px;
         margin-top: 16px;
         margin-bottom: 16px;
         border-radius: var(--card-border-radius);
