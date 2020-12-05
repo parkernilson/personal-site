@@ -1,5 +1,6 @@
 <script lang="typescript">
 	import { fade } from 'svelte/transition';
+	import Background from './landing-page/Background.svelte';
 	import ProjectsList from './projects/ProjectsList.svelte';
 
 	let scrollY: number;
@@ -25,6 +26,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		position: relative;
+		z-index: -100;
 
 		margin: 0;
 		height: 100vh;
@@ -101,6 +103,7 @@
 </svelte:head>
 
 <div class="landing-area">
+	<Background />
 	<div class="upper-content">
 		<div class="circle" />
 		<p class="tagline">simple, concise, productive,</p>
