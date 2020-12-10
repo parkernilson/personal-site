@@ -15,26 +15,19 @@
 
         --side-padding: 16px;
     }
-    .card-header {
-        padding: 16px;
-    }
-    .project-logo-container {
-        margin: auto;
-        width: 64px;
-        height: 64px;
-        padding: 4px;
-        box-sizing: border-box;
-    }
-    .project-logo {
-        height: 100%;
-        background-size: contain;
+    .cover-image {
+        background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
+        height: 300px;
     }
     .project-title {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+
         margin-top: 0;
         margin-bottom: 0;
-        color: white;
         font-weight: 700;
         font-size: 24px;
         text-align: center;
@@ -53,16 +46,9 @@
 
 <div class="container">
     <div 
-        class="card-header"
-        style="background-color: {project.projectLogoBackgroundColor}"
-    >
-        <div class="project-logo-container">
-            <div 
-                class="project-logo" 
-                style="background-image: url({`${project.projectLogo.formats.medium.url}`})" 
-            />
-        </div>
-        <p class="project-title">{project.title}</p>
-    </div>
+        class="cover-image" 
+        style="background-image: url({`${project.coverImage.formats.medium.url}`})" 
+    />
+    <p class="project-title">{project.title}</p>
     <p class="short-description">{project.shortDescription}</p>
 </div>
