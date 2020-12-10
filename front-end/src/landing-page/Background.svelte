@@ -12,6 +12,11 @@
 
     let canvas: HTMLElement
 
+    let pause: boolean = false;
+
+    window.addEventListener('blur', () => pause = true )
+    window.addEventListener('focus', () => pause = false )
+
     // create pixi cloud app
     const app = new Application({
         transparent: true
@@ -24,6 +29,15 @@
     const cloud = Sprite.from('white-cloud.png')
     let clouds: { [id: string]: PIXI.Sprite } = {};
 
+    const g = new PIXI.Graphics();
+    // g.beginFill(0x2C8DE3)
+    // g.drawRect(0, 0, window.innerWidth, window.innerHeight);
+    // g.endFill()
+    g.beginFill(0xffd000)
+    g.drawCircle(window.innerWidth / 2, window.innerHeight / 2, 100)
+    g.endFill()
+    g.zIndex = 1
+    app.stage.addChild(g)
 
     /* Displacement */
     // const cloudDisplacement = Sprite.from('cloud-displacement-map.png')
@@ -37,16 +51,18 @@
 
     // animate the clouds moving
     animateCallback((t, x, elapsed) => {
-        const cloudSpeed = 0.5;
+        if (!pause) {
+            const cloudSpeed = 3;
 
-        for (let [id, cloud] of Object.entries(clouds)) {
-            // if the cloud has moved out of the canvas, delete it
-            if (cloud.x > window.innerWidth + cloud.width) {
-                app.stage.removeChild(cloud)
-                delete clouds[id]
-            } else {
-                // move each cloud
-                cloud.x += cloudSpeed
+            for (let [id, cloud] of Object.entries(clouds)) {
+                // if the cloud has moved out of the canvas, delete it
+                if (cloud.x > window.innerWidth + cloud.width) {
+                    app.stage.removeChild(cloud)
+                    delete clouds[id]
+                } else {
+                    // move each cloud
+                    cloud.x += cloudSpeed
+                }
             }
         }
     }, { duration: "infinite" })
@@ -57,20 +73,28 @@
     */
 
     /** Spawn a random cloud to move across the screen */
-    function spawnRandomCloud() {
+    function spawnRandomCloud(forceOffscreen=true) {
         const newCloud = Sprite.from(cloud.texture)
         newCloud.anchor.set(1,1)
-        newCloud.alpha = 0.2
-        newCloud.y = Math.random() * window.innerHeight
+        newCloud.alpha = 0.5
+        newCloud.zIndex = -1
+        if (forceOffscreen) {
+            newCloud.y = Math.random() * window.innerHeight
+        } else {
+            newCloud.x = Math.random() * window.innerWidth
+            newCloud.y = Math.random() * window.innerHeight
+        }
         app.stage.addChild(newCloud)
         clouds = { ...clouds, [randomId()]: newCloud }
     }
 
     /** On an interval, determine if a cloud should be generated */
     function generateCloud() {
-        const cloudChance = 0.5;
-        if (Math.random() < cloudChance) {
-            spawnRandomCloud()
+        if (!pause) {
+            const cloudChance = 0.9;
+            if (Math.random() < cloudChance) {
+                spawnRandomCloud()
+            }
         }
         setTimeout(() => generateCloud(), 1000);
     }

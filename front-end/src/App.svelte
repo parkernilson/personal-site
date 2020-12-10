@@ -31,6 +31,7 @@
 		margin: 0;
 		height: 100vh;
 		background: linear-gradient(160deg, #7CC2FF 0%, #2C8DE3 100%);
+		/* background-color: #7CC2FF; */
 	}
 	.upper-content {
 		flex: 1;
@@ -104,7 +105,7 @@
 
 <div class="landing-area">
 	<Background />
-	<div class="upper-content">
+	<!-- <div class="upper-content">
 		<div class="circle" />
 		<p class="tagline">simple, concise, productive,</p>
 		<h1 class="title">Parker Nilson.</h1>
@@ -115,7 +116,7 @@
 			<div transition:fade class="scroll-down">Scroll down</div>
 			<img transition:fade class="down-arrow" src="down-arrow.svg" alt="down arrow" />
 		{/if}
-	</div>
+	</div> -->
 </div>
 
 <ProjectsList />
